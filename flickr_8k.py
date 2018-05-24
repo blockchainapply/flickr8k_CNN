@@ -171,10 +171,8 @@ class SimpleCNN(Chain):
     
     def __call__(self, xt, xi):
         ht = F.max(F.max(F.relu(self.conv_t(xt)), axis=2), axis=2)
-        ht_ = ht.reshape((ht.shape[0], ht.shape[1], 1, 1))
         hi = F.max(F.max(F.relu(self.conv_i(xi)), axis=2), axis=2)
-        hi_ = hi.reshape((hi.shape[0], hi.shape[1], 1, 1))
-        product = ht_*hi_
+        product = ht*hi
         max_product = F.max(product, axis=1)
         max_ = max_product.reshape(max_product.shape[0], 1)
         y = F.sigmoid(max_)
