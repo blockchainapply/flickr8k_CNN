@@ -169,7 +169,6 @@ class SimpleCNN(Chain):
             conv_i = L.Convolution2D(input_channel, output_channel, i_filter_height),
         )
     
-    #Classifier によって呼ばれる
     def __call__(self, xt, xi):
         ht = F.max(F.max(F.relu(self.conv_t(xt)), axis=2), axis=2)
         ht_ = ht.reshape((ht.shape[0], ht.shape[1], 1, 1))
